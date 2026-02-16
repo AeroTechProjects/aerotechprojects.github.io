@@ -8,22 +8,29 @@
 :root{
   --accent-1:#19baff;
   --accent-2:#7c4dff;
+  --muted:rgba(234,241,255,0.06);
+  --glass:rgba(255,255,255,0.04);
   --text:#eaf1ff;
-  --glass:rgba(255,255,255,.05);
+  --shadow-1:0 8px 30px rgba(8,10,30,0.6);
 }
 
 /* BASE */
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{height:100%;margin:0}
 body{
   font-family:Inter,Arial,sans-serif;
-  background:linear-gradient(180deg,#0e1330,#0b1020);
+  background:
+    radial-gradient(800px 600px at 80% -10%, #1c1f5a66 0%, transparent 60%),
+    radial-gradient(700px 500px at -20% 10%, #0f4f5f66 0%, transparent 60%),
+    radial-gradient(600px 400px at 50% 100%, #14224d80 0%, transparent 60%),
+    linear-gradient(180deg,#0e1330,#0b1020);
   color:var(--text);
 }
 
 /* HEADER */
 header{
   display:flex;
+  justify-content:space-between;
   align-items:center;
   padding:20px 40px;
 }
@@ -34,15 +41,16 @@ header{
   margin:24px;
   min-height:420px;
   border-radius:18px;
-  background:url("banner.jpg") center/cover;
-  position:relative;
   overflow:hidden;
+  position:relative;
+  background:url("banner.jpg") center/cover;
+  box-shadow:0 40px 80px rgba(2,6,23,.75);
 }
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(90deg,rgba(0,0,0,.7),transparent);
+  background:linear-gradient(90deg,rgba(0,0,0,.75),transparent);
 }
 .hero-content{
   position:relative;
@@ -51,9 +59,11 @@ header{
 .hero h1{
   font-size:64px;
   margin:0;
+  color:#f2f6ff;
 }
 .subtitle{
-  max-width:520px;
+  margin-top:18px;
+  max-width:560px;
   line-height:1.6;
   opacity:.85;
 }
@@ -68,10 +78,10 @@ header{
 }
 .gallery-item{
   width:220px;
-  background:linear-gradient(180deg,#0f173a,#0b1028);
   border-radius:14px;
   overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  box-shadow:0 24px 60px rgba(2,6,23,.6);
   transition:.3s;
 }
 .gallery-item:hover{transform:translateY(-6px)}
@@ -83,15 +93,15 @@ header{
 .gallery-item p{
   margin:12px;
   font-weight:600;
+  color:#eaf1ff;
 }
 
-/* FOOTER – кабуд + торик поён */
+/* FOOTER – ФАҚАТ РАНГ ИВАЗ ШУДА */
 .footer{
-  background:linear-gradient(180deg,#1c4fd6,#081a3a);
+  background:linear-gradient(180deg,#2f6fd6,#0b2a5b);
+  color:#fff;
   padding:40px;
   text-align:center;
-  color:#fff;
-  margin-top:40px;
 }
 
 /* RESPONSIVE */
@@ -106,7 +116,7 @@ header{
 
 <header>
   <div class="logo">
-    <img src="logo1.jpg">
+    <img src="logo1.jpg" alt="logo">
   </div>
 </header>
  
@@ -235,5 +245,9 @@ header{
       document.querySelector('.cards').scrollBy({ left: 220, behavior: 'smooth' });
     });
   </script>
+<div class="footer">
+  © 2026 AeroTechProjects
+</div>
+
 </body>
 </html>
