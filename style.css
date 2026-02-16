@@ -1,3 +1,4 @@
+<style>
 :root{
   --bg:#f3e8d7;
   --card:#ffffff;
@@ -5,15 +6,15 @@
   --accent:#7b4b2a;
 }
 
-/* GLOBAL */
 body{
   margin:0;
-  font-family:Inter, Arial, sans-serif;
+  font-family:Inter,Arial;
   background:var(--bg);
   color:var(--text);
 }
 
 /* HEADER */
+
 header{
   display:flex;
   justify-content:space-between;
@@ -26,6 +27,7 @@ header{
 }
 
 /* HERO */
+
 .hero{
   margin:20px auto;
   width:90%;
@@ -40,11 +42,7 @@ header{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    90deg,
-    rgba(0,0,0,0.6),
-    transparent
-  );
+  background:linear-gradient(90deg,rgba(0,0,0,.6),transparent);
 }
 
 .hero-content{
@@ -52,7 +50,7 @@ header{
   top:50%;
   left:60px;
   transform:translateY(-50%);
-  color:#ffffff;
+  color:#fff;
   max-width:500px;
 }
 
@@ -67,6 +65,7 @@ header{
 }
 
 /* SECTION TITLE */
+
 .section-title{
   text-align:center;
   font-size:22px;
@@ -75,6 +74,7 @@ header{
 }
 
 /* PROJECT CARDS */
+
 .gallery{
   display:flex;
   flex-wrap:wrap;
@@ -88,8 +88,8 @@ header{
   background:var(--card);
   border-radius:14px;
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  transition:0.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  transition:.3s;
 }
 
 .gallery-item:hover{
@@ -108,25 +108,19 @@ header{
   text-align:center;
 }
 
-/* FOOTER (BLUE GRADIENT LIKE BEFORE) */
+/* FOOTER STYLE BLOCK */
+
 .footer{
-  background:linear-gradient(
-    180deg,
-    #2f6fd6 0%,
-    #0b2a5b 100%
-  );
-  color:#ffffff;
+  background:#3d2b1f;
+  color:#fff;
   padding:40px;
   text-align:center;
 }
 
 /* RESPONSIVE */
-@media(max-width:700px){
-  .hero h1{
-    font-size:36px;
-  }
 
-  .gallery-item{
-    width:45%;
-  }
+@media(max-width:700px){
+  .hero h1{font-size:36px}
+  .gallery-item{width:45%}
 }
+</style>
