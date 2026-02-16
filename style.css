@@ -19,20 +19,22 @@ header{
   z-index:999;
 }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:15px;
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 0; /* фосила тамоман нест */
 }
 
-.logo img{
-  height:42px;
+.logo-title h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0;
+    transform: translateX(-10px); /* матнро ба логотип тела медиҳад */
 }
 
-.logo-title{
-  color:#fff;
-  font-size:22px;
-  font-weight:600;
+.logo {
+    width: 60px;  /* андозаи логотип */
+    height: auto;
 }
 .hero{
   margin-top:90px;
