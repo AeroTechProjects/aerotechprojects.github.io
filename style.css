@@ -1,8 +1,7 @@
 /* =========================
    FORCE DARK BLUE COLORS
    NO DESIGN CHANGE
-   ========================= */
-
+========================= */
 html, body{
   background:
     radial-gradient(800px 600px at 80% -10%, #1c1f5a66 0%, transparent 60%),
@@ -30,7 +29,6 @@ html, body{
 .gallery{
   background:transparent !important;
 }
-
 .gallery-item,
 .card{
   background:linear-gradient(
@@ -46,7 +44,7 @@ p, h1, h2, h3, h4, h5, h6{
   color:#eaf1ff !important;
 }
 
-/* FOOTER */
+/* FOOTER BACKGROUND (DESIGN) */
 footer,
 .footer{
   background:linear-gradient(
@@ -58,17 +56,20 @@ footer,
 }
 
 /* REMOVE WHITE BLOCKS */
-section, main, div{
+section,
+main,
+div{
   background-color:transparent !important;
-   .footer {
-  position: fixed;        /* ё absolute, агар fixed намехоҳӣ */
-  bottom: 20px;           /* ками болотар (рақамро каму зиёд кун) */
+}
+
+/* FOOTER POSITION (CENTER + UP) */
+.footer{
+  position: fixed;          /* footer часпида меистад */
+  bottom: 20px;             /* ками болотар */
   left: 50%;
   transform: translateX(-50%);
-  
   text-align: center;
   width: 100%;
-  color: #aaa;            /* ихтиёрӣ */
-  font-size: 14px;        /* ихтиёрӣ */
-}
+  font-size: 14px;
+  z-index: 9999;
 }
