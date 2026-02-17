@@ -44,17 +44,6 @@ p, h1, h2, h3, h4, h5, h6{
   color:#eaf1ff !important;
 }
 
-/* FOOTER BACKGROUND (DESIGN) */
-footer,
-.footer{
-  background:linear-gradient(
-    180deg,
-    #2f6fd6 0%,
-    #0b2a5b 100%
-  ) !important;
-  color:#ffffff !important;
-}
-
 /* REMOVE WHITE BLOCKS */
 section,
 main,
@@ -62,14 +51,25 @@ div{
   background-color:transparent !important;
 }
 
-/* FOOTER POSITION (CENTER + UP) */
+/* FOOTER — CENTER FIX (THE REAL FIX) */
+footer,
 .footer{
-  position: fixed;          /* footer часпида меистад */
-  bottom: 20px;             /* ками болотар */
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  position: fixed;
+  bottom: 20px;              /* ками болотар */
+  left: 0;
   width: 100%;
+
+  display: flex;             /* <<< МУҲИМ */
+  justify-content: center;   /* <<< БА БАЙН */
+  align-items: center;
+
+  background: linear-gradient(
+    180deg,
+    #2f6fd6 0%,
+    #0b2a5b 100%
+  ) !important;
+
+  color: #ffffff !important;
   font-size: 14px;
   z-index: 9999;
 }
