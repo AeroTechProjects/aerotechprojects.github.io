@@ -60,4 +60,15 @@ footer,
 /* REMOVE WHITE BLOCKS */
 section, main, div{
   background-color:transparent !important;
+   .footer {
+  position: fixed;        /* ё absolute, агар fixed намехоҳӣ */
+  bottom: 20px;           /* ками болотар (рақамро каму зиёд кун) */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  text-align: center;
+  width: 100%;
+  color: #aaa;            /* ихтиёрӣ */
+  font-size: 14px;        /* ихтиёрӣ */
+}
 }
