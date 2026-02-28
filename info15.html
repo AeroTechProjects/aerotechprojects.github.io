@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .image-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .image-container img {
+      width: 60%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+    pre {
+      background-color: #1b1b1b;
+      color: #f1f1f1;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    h3 {
+      margin-top: 30px;
+      color: #000000;
+    }
+  </style>
+  <link rel="icon" href="favicon.jpg" type="image/png">
+</head>
+<body>
+
+  
+  <div class="image-container">
+    <img src="photo15.jpg" alt="photo">
+  </div>
+
+  <h2>
+    
+</h2>
+
+  <h3>Code for Arduino</h3>
+  <pre><code>
+#include <Servo.h>
+
+Servo s1, s2, s3, s4, s5;
+
+void setup() {
+  Serial.begin(9600);
+
+  s1.attach(3);
+  s2.attach(5);
+  s3.attach(6);
+  s4.attach(9);
+  s5.attach(10);
+}
+
+void loop() {
+  if (Serial.available() >= 5) {
+
+    char f1 = Serial.read();
+    char f2 = Serial.read();
+    char f3 = Serial.read();
+    char f4 = Serial.read();
+    char f5 = Serial.read();
+
+    s1.write(f1 == '1' ? 180 : 0);
+    s2.write(f2 == '1' ? 180 : 0);
+    s3.write(f3 == '1' ? 180 : 0);
+    s4.write(f4 == '1' ? 180 : 0);
+    s5.write(f5 == '1' ? 180 : 0);
+  }
+}
+
+    </pre>
+  
+  <h3>Code for Python</h3>
+  <pre><code>
+import cv2
+import mediapipe as mp
+import serial
+import time
+
+# ===== Serial =====
+arduino = serial.Serial('COM4', 9600)
+time.sleep(2)
+
+# ===== MediaPipe =====
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(
+    min_detection_confidence=0.7,
+    min_tracking_confidence=0.7
+)
+
+mp_drawing = mp.solutions.drawing_utils
+
+cap = cv2.VideoCapture(0)
+
+def detect_fingers(lm):
+    fingers = []
+
+    fingers.append(1 if lm.landmark[4].x < lm.landmark[3].x else 0)
+    fingers.append(1 if lm.landmark[8].y < lm.landmark[6].y else 0)
+    fingers.append(1 if lm.landmark[12].y < lm.landmark[10].y else 0)
+    fingers.append(1 if lm.landmark[16].y < lm.landmark[14].y else 0)
+    fingers.append(1 if lm.landmark[20].y < lm.landmark[18].y else 0)
+
+    return fingers
+
+
+while True:
+    success, img = cap.read()
+    if not success:
+        break
+
+    img = cv2.flip(img, 1)
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb)
+    img = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+
+            
+            mp_drawing.draw_landmarks(
+                img,
+                hand_landmarks,
+                mp_hands.HAND_CONNECTIONS,
+                mp_drawing.DrawingSpec(color=(0,255,0), thickness=2, circle_radius=4),
+                mp_drawing.DrawingSpec(color=(0,0,255), thickness=2)
+            )
+
+            fingers = detect_fingers(hand_landmarks)
+            data = ''.join(map(str, fingers))
+            arduino.write(data.encode())
+
+            print(data)
+
+    cv2.imshow("Hand Tracking", img)
+
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+
+cap.release()
+arduino.close()
+cv2.destroyAllWindows()
+    </code></pre>
