@@ -40,7 +40,58 @@
 <h2>Controlling 3D on OLED display</h2>
 
 <pre>
+<style>
+.code-wrapper {
+  position: relative;
+}
 
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #2b2b2b;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.copy-btn:hover {
+  background: #444;
+}
+
+.copy-btn.copied {
+  background: green;
+}
+</style>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode()">📋</button>
+
+<pre><code id="codeBlock">
+(КОДИ ТУ ИНҶО БЕ ТАҒЙИР МЕМОНАД)
+</code></pre>
+
+</div>
+
+<script>
+function copyCode() {
+  const code = document.getElementById("codeBlock").innerText;
+  navigator.clipboard.writeText(code);
+
+  const btn = document.querySelector(".copy-btn");
+  btn.classList.add("copied");
+  btn.innerText = "✅";
+
+  setTimeout(() => {
+    btn.classList.remove("copied");
+    btn.innerText = "📋";
+  }, 1500);
+}
+</script>
 <pre><code>
 #include &lt;Wire.h&gt;
 #include &lt;Adafruit_GFX.h&gt;
