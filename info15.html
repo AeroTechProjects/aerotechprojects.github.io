@@ -34,7 +34,7 @@
 
     h3 {
       margin-top: 30px;
-      color: #000;
+      color: #000000;
     }
 
     .code-wrapper {
@@ -88,6 +88,7 @@ Servo s1, s2, s3, s4, s5;
 
 void setup() {
   Serial.begin(9600);
+
   s1.attach(3);
   s2.attach(5);
   s3.attach(6);
@@ -97,6 +98,7 @@ void setup() {
 
 void loop() {
   if (Serial.available() >= 5) {
+
     char f1 = Serial.read();
     char f2 = Serial.read();
     char f3 = Serial.read();
@@ -123,9 +125,11 @@ import mediapipe as mp
 import serial
 import time
 
+# ===== Serial =====
 arduino = serial.Serial('COM4', 9600)
 time.sleep(2)
 
+# ===== MediaPipe =====
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
     min_detection_confidence=0.7,
@@ -133,16 +137,56 @@ hands = mp_hands.Hands(
 )
 
 mp_drawing = mp.solutions.drawing_utils
+
 cap = cv2.VideoCapture(0)
 
 def detect_fingers(lm):
     fingers = []
+
     fingers.append(1 if lm.landmark[4].x < lm.landmark[3].x else 0)
     fingers.append(1 if lm.landmark[8].y < lm.landmark[6].y else 0)
     fingers.append(1 if lm.landmark[12].y < lm.landmark[10].y else 0)
     fingers.append(1 if lm.landmark[16].y < lm.landmark[14].y else 0)
     fingers.append(1 if lm.landmark[20].y < lm.landmark[18].y else 0)
+
     return fingers
+
+
+while True:
+    success, img = cap.read()
+    if not success:
+        break
+
+    img = cv2.flip(img, 1)
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb)
+    img = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+
+            mp_drawing.draw_landmarks(
+                img,
+                hand_landmarks,
+                mp_hands.HAND_CONNECTIONS,
+                mp_drawing.DrawingSpec(color=(0,255,0), thickness=2, circle_radius=4),
+                mp_drawing.DrawingSpec(color=(0,0,255), thickness=2)
+            )
+
+            fingers = detect_fingers(hand_landmarks)
+            data = ''.join(map(str, fingers))
+            arduino.write(data.encode())
+
+            print(data)
+
+    cv2.imshow("Hand Tracking", img)
+
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+
+cap.release()
+arduino.close()
+cv2.destroyAllWindows()
     </code></pre>
   </div>
 
