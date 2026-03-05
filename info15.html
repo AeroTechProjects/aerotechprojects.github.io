@@ -202,16 +202,18 @@ cv2.destroyAllWindows()
 
 <script>
 document.querySelectorAll(".copy-btn").forEach(button => {
+  const originalHTML = button.innerHTML; // нигоҳ доштани SVG аслӣ
+
   button.addEventListener("click", () => {
     const code = button.nextElementSibling.innerText;
 
     navigator.clipboard.writeText(code).then(() => {
       button.classList.add("copied");
-      button.innerText = "✅";
+      button.innerHTML = '✅'; // вақтанӣ нишон додани ✅
 
       setTimeout(() => {
         button.classList.remove("copied");
-        button.innerText = "📋";
+        button.innerHTML = originalHTML; // баргардонидани SVG аслӣ
       }, 1500);
     });
   });
