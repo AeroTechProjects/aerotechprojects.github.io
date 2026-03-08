@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .image-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .image-container img {
+      width: 60%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    pre {
+      background-color: #1b1b1b;
+      color: #00ffcc;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    h3 {
+      margin-top: 30px;
+      color: #000000;
+    }
+
+    .code-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #2b2b2b;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #444;
+    }
+
+    .copy-btn.copied {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="image-container">
+    <img src="photo16.jpg" alt="photo">
+  </div>
+
+  <h2>
+   ESP32 Bluetooth Controlled Car
+In this project, I built a small smart car using the ESP32 microcontroller. The car can be controlled wirelessly through Bluetooth using a smartphone. I designed the system so that the phone sends commands to the ESP32, and the ESP32 controls the motors to move the car forward, backward, left, and right.
+This project demonstrates how to use Bluetooth communication, motor drivers, and microcontroller programming to create a simple remote-controlled vehicle. It is a great beginner project for learning robotics, Arduino programming, and wireless control systems.
+Main features:
+Control the car using a smartphone
+Bluetooth communication with ESP32
+Forward, backward, left, and right movement
+Simple and affordable DIY electronics project
+This project is perfect for anyone interested in electronics, robotics, and DIY technology.
+  </h2>
+
+  <h3>Code for ESP32</h3>
+
+  <div class="code-wrapper">
+    <button class="copy-btn">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+</button>
+    <pre><code>
+#include "BluetoothSerial.h"
+
+BluetoothSerial SerialBT;
+
+int IN1 = 26;
+int IN2 = 27;
+int IN3 = 14;
+int IN4 = 12;
+
+
+void forward();
+void back();
+void left();
+void right();
+void stopCar();
+
+void setup() {
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  stopCar();
+
+  SerialBT.begin("ESP32_CAR"); 
+}
+
+void loop() {
+  if (SerialBT.available()) {
+    char c = SerialBT.read();
+
+    if (c == 'F') forward();
+    else if (c == 'B') back();
+    else if (c == 'L') left();
+    else if (c == 'R') right();
+    else if (c == 'S') stopCar();
+  }
+}
+
+void forward(){
+  digitalWrite(IN1,1); 
+  digitalWrite(IN2,0);
+  digitalWrite(IN3,1); 
+  digitalWrite(IN4,0);
+}
+
+void back(){
+  digitalWrite(IN1,0); 
+  digitalWrite(IN2,1);
+  digitalWrite(IN3,0); 
+  digitalWrite(IN4,1);
+}
+
+void left(){
+  digitalWrite(IN1,0); 
+  digitalWrite(IN2,1);
+  digitalWrite(IN3,1); 
+  digitalWrite(IN4,0);
+}
+
+void right(){
+  digitalWrite(IN1,1); 
+  digitalWrite(IN2,0);
+  digitalWrite(IN3,0); 
+  digitalWrite(IN4,1);
+}
+
+void stopCar(){
+  digitalWrite(IN1,0);
+  digitalWrite(IN2,0);
+  digitalWrite(IN3,0);
+  digitalWrite(IN4,0);
+}
+    </code></pre>
+  </div>
+
+<script>
+document.querySelectorAll(".copy-btn").forEach(button => {
+  const originalHTML = button.innerHTML; // нигоҳ доштани SVG аслӣ
+
+  button.addEventListener("click", () => {
+    const code = button.nextElementSibling.innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      button.classList.add("copied");
+      button.innerHTML = '✅'; // вақтанӣ нишон додани ✅
+
+      setTimeout(() => {
+        button.classList.remove("copied");
+        button.innerHTML = originalHTML; // баргардонидани SVG аслӣ
+      }, 1500);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
