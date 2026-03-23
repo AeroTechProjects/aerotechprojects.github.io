@@ -100,27 +100,26 @@ BleMouse bleMouse;
 // -------- MPU6050 --------
 const uint8_t IMUAddress = 0x68;
 uint8_t i2cData[14];
-
 int16_t gyroX, gyroZ;
 
 // -------- Settings --------
-int Sensitivity = 500;
-float speed = 2.5;
-int delayi = 5;
-int deadzone = 4;
+int Sensitivity = 500;     // Lower = faster movement
+float speed = 2.5;        // Mouse speed multiplier
+int delayi = 5;           // Loop delay (ms)
+int deadzone = 4;         // Ignore small movements (drift filter)
 
 // -------- Offset (drift fix) --------
 float offsetX = 0;
 float offsetZ = 0;
 
-// -------- Button --------
-#define BTN_LEFT  18
-#define BTN_RIGHT 19
+// -------- Buttons --------
+#define BTN_LEFT  18      // Left click pin
+#define BTN_RIGHT 19      // Right click pin
 
 bool lastLeft = HIGH;
 bool lastRight = HIGH;
 
-// -------- I2C --------
+// -------- I2C Write --------
 uint8_t i2cWrite(uint8_t reg, uint8_t* data, uint8_t len, bool stop) {
     Wire.beginTransmission(IMUAddress);
     Wire.write(reg);
@@ -128,13 +127,16 @@ uint8_t i2cWrite(uint8_t reg, uint8_t* data, uint8_t len, bool stop) {
     return Wire.endTransmission(stop);
 }
 
+// -------- I2C Write Single Byte --------
 uint8_t i2cWrite2(uint8_t reg, uint8_t data, bool stop) {
     return i2cWrite(reg, &data, 1, stop);
 }
 
+// -------- I2C Read --------
 uint8_t i2cRead(uint8_t reg, uint8_t* data, uint8_t nbytes) {
     Wire.beginTransmission(IMUAddress);
     Wire.write(reg);
+
     if (Wire.endTransmission(false))
         return 1;
 
@@ -149,13 +151,14 @@ uint8_t i2cRead(uint8_t reg, uint8_t* data, uint8_t nbytes) {
     return 0;
 }
 
-
+// -------- GYRO CALIBRATION --------
 void calibrateGyro() {
     long sumX = 0;
     long sumZ = 0;
 
     Serial.println("Calibrating... DON'T MOVE");
 
+    // Take 500 samples to calculate offset
     for (int i = 0; i < 500; i++) {
         i2cRead(0x3B, i2cData, 14);
 
@@ -168,6 +171,7 @@ void calibrateGyro() {
         delay(5);
     }
 
+    // Average offset (drift compensation)
     offsetX = sumX / 500.0;
     offsetZ = sumZ / 500.0;
 
@@ -188,35 +192,43 @@ void setup() {
     data[1] = 0x00;
     data[3] = 0x00;
 
+    // Set sample rate and config
     while (i2cWrite(0x19, data, 4, false));
+
+    // Wake up MPU6050
     while (i2cWrite2(0x6B, 0x01, true));
+
+    // Check device ID
     while (i2cRead(0x75, data, 1));
 
     delay(200);
 
-    
+    // 🔥 CALIBRATION
     calibrateGyro();
 
+    // Start BLE mouse
     bleMouse.begin();
 }
 
 // -------- LOOP --------
 void loop() {
+
+    // Read MPU6050 data
     while (i2cRead(0x3B, i2cData, 14));
 
-    
+    // Read gyro and subtract offset (drift fix)
     gyroX = ((i2cData[8] << 8) | i2cData[9]) - offsetX;
     gyroZ = ((i2cData[12] << 8) | i2cData[13]) - offsetZ;
 
-    // sensitivity + speed
+    // Apply sensitivity and speed scaling
     gyroX = (gyroX / Sensitivity / 1.1) * speed;
     gyroZ = (gyroZ / Sensitivity) * -speed;
 
-    // deadzone
+    // Deadzone (ignore tiny unwanted movement)
     if (abs(gyroX) < deadzone) gyroX = 0;
     if (abs(gyroZ) < deadzone) gyroZ = 0;
 
-    // smoothing
+    // Smoothing (reduce shaking)
     static float smoothX = 0;
     static float smoothZ = 0;
 
@@ -227,33 +239,38 @@ void loop() {
     gyroZ = smoothZ;
 
     if (bleMouse.isConnected()) {
+
+        // Move mouse
         bleMouse.move(gyroZ, -gyroX);
 
-        // LEFT CLICK
+        // -------- LEFT CLICK --------
         bool leftState = digitalRead(BTN_LEFT);
+
         if (leftState == LOW && lastLeft == HIGH) {
             bleMouse.press(MOUSE_LEFT);
         }
+
         if (leftState == HIGH && lastLeft == LOW) {
             bleMouse.release(MOUSE_LEFT);
         }
+
         lastLeft = leftState;
 
-        // RIGHT CLICK
+        // -------- RIGHT CLICK --------
         bool rightState = digitalRead(BTN_RIGHT);
+
         if (rightState == LOW && lastRight == HIGH) {
             bleMouse.press(MOUSE_RIGHT);
         }
         if (rightState == HIGH && lastRight == LOW) {
             bleMouse.release(MOUSE_RIGHT);
         }
+
         lastRight = rightState;
     }
 
-    delay(delayi);
+    delay(delayi); // Small delay for stability
 }
-    </code></pre>
-  </div>
 
 <script>
 document.querySelectorAll(".copy-btn").forEach(button => {
