@@ -4,23 +4,24 @@
 ========================= */
 html, body{
   background:
-    radial-gradient(800px 600px at 80% -10%, #1c1f5a66 0%, transparent 60%),
-    radial-gradient(700px 500px at -20% 10%, #0f4f5f66 0%, transparent 60%),
-    radial-gradient(600px 400px at 50% 100%, #14224d80 0%, transparent 60%),
-    linear-gradient(180deg,#0e1330,#0b1020)
+    radial-gradient(800px 600px at 80% -10%, #0a0c14 0%, transparent 60%),
+    radial-gradient(700px 500px at -20% 10%, #081015 0%, transparent 60%),
+    radial-gradient(600px 400px at 50% 100%, #0a0f1c 0%, transparent 60%),
+    linear-gradient(180deg,#05070d,#02040a)
     !important;
   color:#eaf1ff !important;
 }
 
 /* HERO */
 .hero{
-  background-color:#0b1020 !important;
+  background-color:#05070d !important;
 }
 .hero::before,
 .hero::after{
   background:linear-gradient(
     90deg,
-    rgba(0,0,0,.75),
+    rgba(0,0,0,.9),
+    rgba(0,0,0,.4),
     transparent
   ) !important;
 }
@@ -31,25 +32,28 @@ html, body{
 }
 .gallery-item,
 .card{
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.05),
-    rgba(255,255,255,.02)
-  ) !important;
-  color:#eaf1ff !important;
+  background: rgba(255,255,255,0.02) !
+important;
+  border: 1px solid
+rgba(255,255,255,0.5);
+  backdrop-filter: blur(10px);
+
+  color:#eaf1ff !important; 
+   
 }
+
+gallery-item:hover{
+   transform: transformY(-6px);
+   box-shadow:
+     0 20px 60px rgba(0,0,0,0.9),
+     0 0 25px rgba(0,207,255,0.25),
+}     
 
 /* TEXT */
 p, h1, h2, h3, h4, h5, h6{
   color:#eaf1ff !important;
 }
 
-/* REMOVE WHITE BLOCKS */
-section,
-main,
-div{
-  background-color:transparent !important;
-}
 
 /* FOOTER — CENTER FIX (THE REAL FIX) */
 footer,
@@ -65,9 +69,12 @@ footer,
 
   background: linear-gradient(
     180deg,
-    #2f6fd6 0%,
-    #0b2a5b 100%
+    #0a0f1c 0%,
+    #05070d 100%
   ) !important;
+
+   border-top:1px solid
+  rgba(255,255,255,0.05);    
 
   color: #ffffff !important;
   font-size: 14px;
