@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arduino RFID Door Lock</title>
+
+<style>
+body{
+font-family:Arial, sans-serif;
+margin:20px;
+line-height:1.6;
+}
+
+h1,h2,h3{
+color:#111;
+}
+
+.image-container{
+text-align:center;
+margin-bottom:30px;
+}
+
+.image-container img{
+width:60%;
+max-width:500px;
+border-radius:10px;
+}
+
+pre{
+background:#1b1b1b;
+color:#00ffcc;
+padding:20px;
+border-radius:10px;
+overflow-x:auto;
+}
+
+.code-wrapper{
+position:relative;
+margin-bottom:20px;
+}
+
+.copy-btn{
+position:absolute;
+top:10px;
+right:10px;
+background:#2b2b2b;
+border:none;
+color:white;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.copy-btn.copied{
+background:green;
+}
+
+section{
+margin-bottom:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Arduino RFID Door Lock System</h1>
+
+<div class="image-container">
+<img src="rfid-project.jpg" alt="rfid project">
+</div>
+
+<section>
+<h2>Abstract</h2>
+<p>
+This project demonstrates a simple RFID access control system using an Arduino Uno and an MFRC522 RFID module.
+When an authorized RFID card is detected, the system activates a servo motor to simulate unlocking a door
+and turns on a green LED. If an unauthorized card is scanned, a red LED indicates access denial.
+</p>
+</section>
+
+<section>
+<h2>Objective</h2>
+<ul>
+<li>Build a basic RFID security system</li>
+<li>Learn RFID communication with Arduino</li>
+<li>Control physical devices based on authentication</li>
+</ul>
+</section>
+
+<section>
+<h2>Components</h2>
+<ul>
+<li>Arduino Uno</li>
+<li>MFRC522 RFID Module</li>
+<li>Servo Motor</li>
+<li>Green LED</li>
+<li>Red LED</li>
+<li>Resistors</li>
+<li>Breadboard and jumper wires</li>
+</ul>
+</section>
+
+<section>
+<h2>Working Principle</h2>
+<p>
+The MFRC522 RFID module reads the UID of an RFID card. The Arduino compares the UID
+with a predefined authorized UID stored in the code.
+If the UID matches, the servo motor rotates to unlock the mechanism and the green LED turns on.
+If the UID does not match, the system denies access and activates the red LED.
+</p>
+</section>
+
+<section>
+<h2>Code</h2>
+
+<div class="code-wrapper">
+<button class="copy-btn">Copy</button>
+
+<pre><code>
+#include &lt;SPI.h&gt;
+#include &lt;MFRC522.h&gt;
+#include &lt;Servo.h&gt;
+
+#define SS_PIN 10
+#define RST_PIN 9
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);
+
+Servo myServo;
+
+int greenLED = 6;
+int redLED = 5;
+int servoPin = 3;
+
+byte authorizedUID[4] = {0xDE,0xAD,0xBE,0xEF};
+
+void setup()
+{
+Serial.begin(9600);
+SPI.begin();
+mfrc522.PCD_Init();
+
+pinMode(greenLED,OUTPUT);
+pinMode(redLED,OUTPUT);
+
+myServo.attach(servoPin);
+myServo.write(0);
+
+Serial.println("Scan RFID card...");
+}
+
+void loop()
+{
+
+if(!mfrc522.PICC_IsNewCardPresent())
+return;
+
+if(!mfrc522.PICC_ReadCardSerial())
+return;
+
+boolean access = true;
+
+for(byte i=0;i&lt;4;i++)
+{
+if(mfrc522.uid.uidByte[i] != authorizedUID[i])
+{
+access = false;
+}
+}
+
+if(access)
+{
+digitalWrite(greenLED,HIGH);
+digitalWrite(redLED,LOW);
+
+myServo.write(180);
+delay(3000);
+myServo.write(0);
+
+digitalWrite(greenLED,LOW);
+}
+else
+{
+digitalWrite(redLED,HIGH);
+delay(2000);
+digitalWrite(redLED,LOW);
+}
+
+mfrc522.PICC_HaltA();
+
+}
+</code></pre>
+</div>
+
+</section>
+
+<section>
+<h2>Results</h2>
+<ul>
+<li>Reliable RFID card detection</li>
+<li>Clear visual access indication</li>
+<li>Simple and effective access control prototype</li>
+</ul>
+</section>
+
+<section>
+<h2>Future Improvements</h2>
+<ul>
+<li>Multiple authorized cards</li>
+<li>LCD display for user feedback</li>
+<li>WiFi logging using ESP32</li>
+<li>Mobile app integration</li>
+</ul>
+</section>
+
+<script>
+document.querySelectorAll(".copy-btn").forEach(button=>{
+const original=button.innerHTML;
+
+button.addEventListener("click",()=>{
+const code=button.nextElementSibling.innerText;
+
+navigator.clipboard.writeText(code).then(()=>{
+button.classList.add("copied");
+button.innerHTML="✅";
+
+setTimeout(()=>{
+button.classList.remove("copied");
+button.innerHTML=original;
+},1500);
+
+});
+});
+});
+</script>
+
+</body>
+</html>
