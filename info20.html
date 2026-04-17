@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 2-Axis Stabilization System</title>
+
+<style>
+body{
+font-family:Arial, sans-serif;
+margin:20px;
+line-height:1.6;
+}
+
+h1,h2,h3{
+color:#111;
+}
+
+.image-container{
+text-align:center;
+margin-bottom:30px;
+}
+
+.image-container img{
+width:60%;
+max-width:500px;
+border-radius:10px;
+}
+
+pre{
+background:#1b1b1b;
+color:#00ffcc;
+padding:20px;
+border-radius:10px;
+overflow-x:auto;
+}
+
+.code-wrapper{
+position:relative;
+margin-bottom:20px;
+}
+
+.copy-btn{
+position:absolute;
+top:10px;
+right:10px;
+background:#2b2b2b;
+border:none;
+color:white;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.copy-btn.copied{
+background:green;
+}
+
+section{
+margin-bottom:30px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>ESP32 2-Axis Stabilization System</h1>
+
+<div class="image-container">
+<img src="photo.jpg" alt="stabilization project">
+</div>
+
+<section>
+<h2>Abstract</h2>
+<p>
+This project demonstrates a 2-axis stabilization system using ESP32 and MPU6050.
+The system reads motion data and controls two servo motors to stabilize movement
+in both roll (left-right) and pitch (forward-backward) directions.
+</p>
+</section>
+
+<section>
+<h2>Objective</h2>
+<ul>
+<li>Build a 2-axis stabilization system</li>
+<li>Learn MPU6050 motion sensing</li>
+<li>Control servo motors based on angle</li>
+</ul>
+</section>
+
+<section>
+<h2>Components</h2>
+<ul>
+<li>ESP32</li>
+<li>MPU6050 Gyroscope</li>
+<li>2x Servo Motors (SG90)</li>
+<li>Breadboard Power Supply (MB102)</li>
+<li>Capacitor 680µF</li>
+<li>Breadboard & wires</li>
+</ul>
+</section>
+
+<section>
+<h2>Working Principle</h2>
+<p>
+The MPU6050 sensor measures acceleration on X and Y axes.
+The ESP32 calculates roll and pitch angles using these values.
+Based on the angle, two servo motors adjust their position to keep the system stable.
+One servo controls left-right movement, and the other controls forward-backward tilt.
+</p>
+</section>
+
+<section>
+<h2>Code</h2>
+
+<div class="code-wrapper">
+<button class="copy-btn">Copy</button>
+
+<pre><code>
+#include &lt;Wire.h&gt;
+#include &lt;MPU6050.h&gt;
+#include &lt;ESP32Servo.h&gt;
+
+MPU6050 mpu;
+
+Servo servoRoll;
+Servo servoPitch;
+
+float roll, pitch;
+
+void setup() {
+  Wire.begin(21, 22);
+  mpu.initialize();
+
+  servoRoll.attach(18);
+  servoPitch.attach(19);
+}
+
+void loop() {
+  int16_t ax, ay, az;
+  mpu.getAcceleration(&ax, &ay, &az);
+
+  roll  = atan2(ay, az) * 180 / PI;
+  pitch = atan2(ax, az) * 180 / PI;
+
+  int rollPos  = map(roll, -90, 90, 0, 180);
+  int pitchPos = map(pitch, -90, 90, 0, 180);
+
+  rollPos  = constrain(rollPos, 0, 180);
+  pitchPos = constrain(pitchPos, 0, 180);
+
+  servoRoll.write(180 - rollPos);
+  servoPitch.write(180 - pitchPos);
+
+  delay(20);
+}
+</code></pre>
+</div>
+
+</section>
+
+<section>
+<h2>Results</h2>
+<ul>
+<li>Stable movement in two axes</li>
+<li>Smooth servo response</li>
+<li>Real-time angle correction</li>
+</ul>
+</section>
+
+<section>
+<h2>Future Improvements</h2>
+<ul>
+<li>Add gyro filtering (reduce drift)</li>
+<li>Use PID control</li>
+<li>Upgrade to brushless gimbal</li>
+<li>Add wireless control (NRF24 / WiFi)</li>
+</ul>
+</section>
+
+<script>
+document.querySelectorAll(".copy-btn").forEach(button=>{
+const original=button.innerHTML;
+
+button.addEventListener("click",()=>{
+const code=button.nextElementSibling.innerText;
+
+navigator.clipboard.writeText(code).then(()=>{
+button.classList.add("copied");
+button.innerHTML="✅";
+
+setTimeout(()=>{
+button.classList.remove("copied");
+button.innerHTML=original;
+},1500);
+
+});
+});
+});
+</script>
+
+</body>
+</html>
