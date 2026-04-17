@@ -58,14 +58,15 @@ p, h1, h2, h3, h4, h5, h6{
 /* FOOTER — CENTER FIX (THE REAL FIX) */
 footer,
 .footer{
-  position: fixed;
-  bottom: 20px;              /* ками болотар */
-  left: 0;
+  .footer {
+  background: #000;          /* сиёҳ */
+  color: #fff;               /* сафед */
+  text-align: center;        /* матн дар марказ */
+  padding: 20px 0;           /* баландии банер */
   width: 100%;
-
-  display: flex;             /* <<< МУҲИМ */
-  justify-content: center;   /* <<< БА БАЙН */
-  align-items: center;
+  margin-top: 40px;
+  font-size: 16px;
+}
 
   background: linear-gradient(
     180deg,
