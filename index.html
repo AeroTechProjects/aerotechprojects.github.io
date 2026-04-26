@@ -545,15 +545,8 @@ h1 {
     </div>
 
   </main>
+  </script>
 
-  
-    // tiny JS for arrows (optional)
-    document.getElementById('prev').addEventListener('click', function(){
-      document.querySelector('.cards').scrollBy({ left: -220, behavior: 'smooth' });
-    });
-    document.getElementById('next').addEventListener('click', function(){
-      document.querySelector('.cards').scrollBy({ left: 220, behavior: 'smooth' });
-    });
 <script>
 function formatNumber(num){
   if(num >= 1000000) return (num/1000000).toFixed(1) + "m";
@@ -572,13 +565,7 @@ document.querySelectorAll(".views-box").forEach(box => {
 
   box.querySelector(".view-count").innerText = formatNumber(views);
 });
-
-  </script>
-
-
-...
-</main>
-
+</script>
 <div style="background:#000;color:#fff;text-align:center;padding:25px 0;">
   © 2026 AeroTechProject
 </div>
