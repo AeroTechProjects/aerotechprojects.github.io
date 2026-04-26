@@ -559,10 +559,7 @@ document.querySelectorAll(".views-box").forEach(box => {
 
   let views = localStorage.getItem("views_"+id) || 0;
 
-  // +1 просмотр
-  views++;
-  localStorage.setItem("views_"+id, views);
-
+  
   box.querySelector(".view-count").innerText = formatNumber(views);
 });
 </script>
