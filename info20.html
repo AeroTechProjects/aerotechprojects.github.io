@@ -198,6 +198,33 @@ button.innerHTML=original;
 });
 });
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "XXXX",
+  authDomain: "XXXX",
+  databaseURL: "XXXX",
+  projectId: "XXXX"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const postId = "post20";
+
+// 🔥 танҳо 1 бор барои як сессия ҳисоб шавад
+if(!sessionStorage.getItem("viewed_"+postId)){
+  const viewsRef = ref(db, "views/" + postId);
+
+  runTransaction(viewsRef, (current) => {
+    return (current || 0) + 1;
+  });
+
+  sessionStorage.setItem("viewed_"+postId, "true");
+}
+</script>
 
 </body>
 </html>
