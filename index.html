@@ -546,7 +546,7 @@ h1 {
 
   </main>
 
-  <script>
+  
     // tiny JS for arrows (optional)
     document.getElementById('prev').addEventListener('click', function(){
       document.querySelector('.cards').scrollBy({ left: -220, behavior: 'smooth' });
@@ -554,6 +554,25 @@ h1 {
     document.getElementById('next').addEventListener('click', function(){
       document.querySelector('.cards').scrollBy({ left: 220, behavior: 'smooth' });
     });
+<script>
+function formatNumber(num){
+  if(num >= 1000000) return (num/1000000).toFixed(1) + "m";
+  if(num >= 1000) return (num/1000).toFixed(1) + "k";
+  return num;
+}
+
+document.querySelectorAll(".views-box").forEach(box => {
+  const id = box.dataset.id;
+
+  let views = localStorage.getItem("views_"+id) || 0;
+
+  // +1 просмотр
+  views++;
+  localStorage.setItem("views_"+id, views);
+
+  box.querySelector(".view-count").innerText = formatNumber(views);
+});
+
   </script>
 
 
