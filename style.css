@@ -68,31 +68,23 @@ p, h1, h2, h3, h4, h5, h6{
   color:#eaf1ff;
 }
 
-/* ===== FOOTER (АСОСӢ) ===== */
-.footer{
-  background: #000;              /* сиёҳ */
-  color: #fff;                   /* сафед */
-  text-align: center;            /* дар марказ */
-  padding: 20px 0;
-  width: 100%;
-  font-size: 16px;
 
-  margin-top: auto;              /* поён мебарад */
-  border-top: 1px solid rgba(255,255,255,0.1);
-.stats {
+  .views-box{
   display:flex;
-  justify-content:space-between;
-  padding: 0 10px 10px 10px;
-  font-size:14px;
+  align-items:center;
+  gap:6px;
+  padding: 6px 10px 12px;
+  font-size:13px;
   font-weight:600;
+  color:#111;
 }
 
-.likes {
-  cursor:pointer;
-  color:#ff3b30;
+.view-text{
+  opacity:0.6;
+  text-transform:lowercase;
 }
 
-.views {
-  color:#555;
+.view-count{
+  font-weight:700;
 }
 }
