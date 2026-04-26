@@ -79,4 +79,20 @@ p, h1, h2, h3, h4, h5, h6{
 
   margin-top: auto;              /* поён мебарад */
   border-top: 1px solid rgba(255,255,255,0.1);
+.stats {
+  display:flex;
+  justify-content:space-between;
+  padding: 0 10px 10px 10px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.likes {
+  cursor:pointer;
+  color:#ff3b30;
+}
+
+.views {
+  color:#555;
+}
 }
