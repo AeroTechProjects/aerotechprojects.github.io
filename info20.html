@@ -197,24 +197,26 @@ button.innerHTML=original;
 });
 });
 });
-</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "XXXX",
-  authDomain: "XXXX",
-  databaseURL: "XXXX",
-  projectId: "XXXX"
+  apiKey: "AIzaSyBHZHVT4M5Yov9nvTuQZpGOvLeq43g9aiQ",
+  authDomain: "aerotechproject-4c676.firebaseapp.com",
+  databaseURL: "https://aerotechproject-4c676-default-rtdb.firebaseio.com",
+  projectId: "aerotechproject-4c676",
+  storageBucket: "aerotechproject-4c676.firebasestorage.app",
+  messagingSenderId: "501704976048",
+  appId: "1:501704976048:web:8fb66924b090c954f0fd75"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const postId = "post20";
+const postId = "post20"; // 👈 ID-ро иваз кун барои ҳар пост
 
-// 🔥 танҳо 1 бор барои як сессия ҳисоб шавад
+// танҳо 1 бор барои як сессия ҳисоб мешавад
 if(!sessionStorage.getItem("viewed_"+postId)){
   const viewsRef = ref(db, "views/" + postId);
 
@@ -225,6 +227,5 @@ if(!sessionStorage.getItem("viewed_"+postId)){
   sessionStorage.setItem("viewed_"+postId, "true");
 }
 </script>
-
 </body>
 </html>
