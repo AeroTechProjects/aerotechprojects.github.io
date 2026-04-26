@@ -546,41 +546,6 @@ h1 {
 
   </main>
   </script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBHZHVT4M5Yov9nvTuQZpGOvLeq43g9aiQ",
-  authDomain: "aerotechproject-4c676.firebaseapp.com",
-  databaseURL: "https://aerotechproject-4c676-default-rtdb.firebaseio.com",
-  projectId: "aerotechproject-4c676",
-  storageBucket: "aerotechproject-4c676.firebasestorage.app",
-  messagingSenderId: "501704976048",
-  appId: "1:501704976048:web:8fb66924b090c954f0fd75"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// формат рақам
-function formatNumber(num){
-  if(num >= 1000000) return (num/1000000).toFixed(1) + "m";
-  if(num >= 1000) return (num/1000).toFixed(1) + "k";
-  return num;
-}
-
-// нишон додани views
-document.querySelectorAll(".views-box").forEach(box => {
-  const id = box.dataset.id;
-  const viewsRef = ref(db, "views/" + id);
-
-  onValue(viewsRef, (snapshot) => {
-    const views = snapshot.val() || 0;
-    box.querySelector(".view-count").innerText = formatNumber(views);
-  });
-});
-</script>
 
   
 <div> style="background:#000;color:#fff;text-align:center;padding:25px 0;">
