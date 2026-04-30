@@ -508,10 +508,11 @@
     }
 
     .featured-item .img-wrap { height: 260px; }
-    .featured-item.main .img-wrap { height: 400px; }
-
-    .featured-item .img-wrap {
-  height: auto;
+    .featured-item .img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom; /* 🔥 муҳим */
 }
 
 .featured-item .img-wrap img {
