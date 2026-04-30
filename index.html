@@ -510,10 +510,15 @@
     .featured-item .img-wrap { height: 260px; }
     .featured-item.main .img-wrap { height: 400px; }
 
-    .featured-item .img-wrap img {
-      object-fit: cover;
-      object-position: center top;
-    }
+    .featured-item .img-wrap {
+  height: auto;
+}
+
+.featured-item .img-wrap img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
       display: flex;
       flex-direction: column;
       height: 100%;
