@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hand Gesture Light Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:       #ffffff;
+    --surface:  rgba(0,0,0,0.03);
+    --surface2: rgba(0,0,0,0.06);
+    --border:   rgba(0,0,0,0.1);
+    --accent:   #000000;
+    --accent2:  #444444;
+    --text:     #0a0a0a;
+    --muted:    rgba(10,10,10,0.45);
+    --code-bg:  #0d1117;
+    --radius:   14px;
+    --nav-h:    68px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ──────────────────────────────── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s, gap 0.2s;
+  }
+  .back-btn:hover { color: var(--text); gap: 12px; }
+  .back-btn svg { transition: transform 0.2s; }
+  .back-btn:hover svg { transform: translateX(-3px); }
+
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .header-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ─── HERO ────────────────────────────────── */
+  .hero {
+    position: relative;
+    padding: 60px 0 0;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 40px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .breadcrumb span { color: var(--accent); font-weight: 700; }
+
+  .project-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 9vw, 80px);
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .tag {
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Space Mono', monospace;
+  }
+  .tag-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+  .tag-muted {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent2);
+  }
+
+  /* ─── PROJECT IMAGE ───────────────────────── */
+  .project-image {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+  }
+  .project-image img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    max-height: 520px;
+  }
+
+  /* ─── CONTENT ─────────────────────────────── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .block {
+    margin-bottom: 52px;
+  }
+
+  .block-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .block h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1.5px;
+    color: var(--text);
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+    padding-bottom: 4px;
+  }
+
+  .block p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(10,10,10,0.72);
+  }
+
+  /* ─── COMPONENTS GRID ─────────────────────── */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .component-card {
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .component-card:hover {
+    border-color: var(--accent);
+    background: var(--surface2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .component-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  .component-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ─── LIST ────────────────────────────────── */
+  .styled-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .styled-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: rgba(10,10,10,0.72);
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .styled-list li:hover { border-color: var(--accent); }
+
+  .styled-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── CODE ────────────────────────────────── */
+  .code-block {
+    position: relative;
+    margin-top: 8px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #161b22;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .code-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .code-dots span {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .code-lang {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+  }
+
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    padding: 5px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Space Mono', monospace;
+    transition: background 0.2s, color 0.2s;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .copy-btn.copied { background: rgba(40,200,80,0.15); border-color: rgba(40,200,80,0.3); color: #28c840; }
+
+  pre {
+    background: var(--code-bg);
+    padding: 28px 24px;
+    overflow-x: auto;
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #c9d1d9;
+  }
+
+  .kw  { color: #ff79c6; }
+  .fn  { color: #8be9fd; }
+  .str { color: #f1fa8c; }
+  .cm  { color: #6272a4; font-style: italic; }
+  .nb  { color: #50fa7b; }
+  .num { color: #bd93f9; }
+
+  /* ─── DIVIDER ─────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 52px 0;
+  }
+
+  /* ─── RESULTS / IMPROVEMENTS ─────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .info-box {
+    padding: 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .info-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+  .info-box.green {
+    border-color: rgba(0,180,80,0.25);
+    background: rgba(0,180,80,0.04);
+  }
+  .info-box.purple {
+    border-color: rgba(100,80,220,0.25);
+    background: rgba(100,80,220,0.04);
+  }
+
+  .info-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .info-box.green h3 { color: #00b450; }
+  .info-box.purple h3 { color: #6450dc; }
+
+  .info-box .styled-list li {
+    background: transparent;
+    border: none;
+    padding: 4px 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .info-box .styled-list li:last-child { border-bottom: none; }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    padding: 36px 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: #0a0a0a;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #ffffff;
+  }
+  .footer-logo span { color: #aaaaaa; }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ─── SCROLL REVEAL ───────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    .header-tag { display: none; }
+    .hero-inner { padding: 0 20px 28px; }
+    .content { padding: 40px 20px 60px; }
+    .two-col { grid-template-columns: 1fr; }
+    .components-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 24px 20px; }
+    pre { font-size: 12px; padding: 16px; }
+  }
+
+  /* ─── VIDEO ───────────────────────────────── */
+  .video-block {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+  .video-block iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════ -->
+<header>
+  <a href="index.html" class="back-btn" onclick="if(document.referrer) { event.preventDefault(); history.back(); }">
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+    Back
+  </a>
+  <a href="index.html" class="logo-text">AeroTechProject</a>
+  <span class="header-tag">Python · MediaPipe</span>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div class="breadcrumb">
+      AeroTechProject <span>/</span> Computer Vision <span>/</span> Python · MediaPipe
+    </div>
+    <h1 class="project-title">Hand Gesture<br>Light Control</h1>
+    <div class="tag-row">
+      <span class="tag tag-accent">Python</span><span class="tag tag-accent">MediaPipe</span><span class="tag tag-muted">Arduino</span><span class="tag tag-muted">Hand Gesture</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTENT ═══════════════════════════════════ -->
+<div class="content">
+
+  <div class="divider"></div>
+
+  <div class="block reveal">
+    <div class="block-label">// Hardware</div>
+    <h2>Components</h2>
+    <div class="components-grid">
+      <div class="component-card">
+        <div class="component-icon">⚡</div>
+        <div class="component-name">Arduino Uno</div>
+      </div>
+      <div class="component-card">
+        <div class="component-icon">📐</div>
+        <div class="component-name">5× LED</div>
+      </div>
+      <div class="component-card">
+        <div class="component-icon">⚙️</div>
+        <div class="component-name">Webcam (for Python/MediaPipe)</div>
+      </div>
+    </div>
+  </div>
+  <div class="block reveal">
+    <div class="block-label">// How It Works</div>
+    <h2>Working Principle</h2>
+    <p>A Python script uses MediaPipe and OpenCV to detect which fingers are raised from a webcam feed, then sends that data over serial to an Arduino, which lights up one LED per raised finger in real time.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="project-image reveal">
+    <img src="aerotechproject-photo-07.jpg" alt="Hand Gesture Light Control">
+  </div>
+  <div class="block reveal">
+    <div class="block-label">// Source Code</div>
+    <h2>Code for Arduino Uno</h2>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+        </div>
+        <span class="code-lang">C++ / ESP32</span>
+        <button class="copy-btn" onclick="copyThisCode(this)">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+<pre><code>int ledPins[] = {8, 9, 10, 11, 12};  // Thumb, Index, Middle, Ring, Pinky
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 0; i &lt; 5; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  if (Serial.available() &gt;= 5) {      // Expect 5 bytes for 5 fingers
+    for (int i = 0; i &lt; 5; i++) {
+      int fingerState = Serial.read();    // Read each finger state (0 or 1)
+      digitalWrite(ledPins[i], fingerState == 1 ? HIGH : LOW);  // Turn LED on/off
+    }
+  }
+}
+  </code></pre>
+    </div>
+  </div>
+  <div class="block reveal">
+    <div class="block-label">// Source Code</div>
+    <h2>Code for Python</h2>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+        </div>
+        <span class="code-lang">Python</span>
+        <button class="copy-btn" onclick="copyThisCode(this)">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+<pre><code>import cv2
+import mediapipe as mp
+import serial
+import time
+
+# Initialize serial communication with Arduino
+arduino = serial.Serial(port=&#x27;COM14&#x27;, baudrate=9600, timeout=1)
+time.sleep(2)  # Wait for the serial connection to initialize
+
+# Initialize Mediapipe
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands()
+mp_drawing = mp.solutions.drawing_utils
+
+# Function to detect individual fingers (1 for up, 0 for down)
+def detect_fingers(image, hand_landmarks):
+    finger_tips = [8, 12, 16, 20]   # Index, Middle, Ring, Pinky
+    thumb_tip = 4
+    finger_states = [0, 0, 0, 0, 0] # Thumb, Index, Middle, Ring, Pinky
+
+    # Check thumb
+    if hand_landmarks.landmark[thumb_tip].x &lt; hand_landmarks.landmark[thumb_tip - 1].x:
+        finger_states[0] = 1  # Thumb is up
+
+    # Check the other fingers
+    for idx, tip in enumerate(finger_tips):
+        if hand_landmarks.landmark[tip].y &lt; hand_landmarks.landmark[tip - 2].y:
+            finger_states[idx + 1] = 1  # Other fingers are up
+
+    return finger_states
+
+# Start capturing video
+cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        break
+
+    image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
+    results = hands.process(image)
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+            finger_states = detect_fingers(image, hand_landmarks)
+            arduino.write(bytes(finger_states))  # Send list of fingers as bytes
+            print(f&quot;Fingers State: {finger_states}&quot;)
+
+    cv2.imshow(&#x27;Hand Tracking&#x27;, image)
+    if cv2.waitKey(5) &amp; 0xFF == 27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+arduino.close()
+  </code></pre>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">Aero<span>Tech</span>Project</div>
+  <div class="footer-copy">© 2026 AeroTechProject</div>
+</footer>
+
+<script>
+  // Copy button (supports multiple code blocks)
+  function copyThisCode(btn) {
+    const codeEl = btn.closest('.code-block').querySelector('code');
+    const tmp = document.createElement('textarea');
+    tmp.innerHTML = codeEl.innerHTML;
+    navigator.clipboard.writeText(tmp.value).then(() => {
+      btn.classList.add('copied');
+      const original = btn.innerHTML;
+      btn.innerHTML = `<svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Copied!`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = original;
+      }, 2000);
+    });
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
