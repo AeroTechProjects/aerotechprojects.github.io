@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AeroTechProject</title>
+  <!-- ─── FAVICON & APP ICONS ─────────────────── -->
+  <link rel="icon" type="image/jpeg" href="photo_2026-09-01_19-22-59.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="photo_2026-09-01_19-22-59.jpg">
+  <link rel="apple-touch-icon" href="photo_2026-09-01_19-22-59.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="AeroTechProject">
+  <meta name="application-name" content="AeroTechProject">
+  <meta name="theme-color" content="#ffffff">
+  <!-- OG / YouTube preview -->
+  <meta property="og:title" content="AeroTechProject">
+  <meta property="og:description" content="Electronics, Robotics & Drone Projects">
+  <meta property="og:image" content="aerotechproject-logo.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AeroTechProject">
+  <meta name="twitter:image" content="aerotechproject-logo.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══════════════════════════════════ -->
+  <header>
+    <a class="logo" href="#">
+      <img src="aerotechproject-logo.jpg" alt="AeroTechProject">
+      <span class="logo-text">Aero<span>Tech</span>Project</span>
+    </a>
+
+    <nav>
+      <a href="#">Projects</a>
+      <a href="#">Tutorials</a>
+      <a href="#">Codes</a>
+      <a href="#">About</a>
+      <a href="#" class="nav-cta">GitHub ↗</a>
+    </nav>
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Projects</a>
+    <a href="#">Tutorials</a>
+    <a href="#">Codes</a>
+    <a href="#">About</a>
+    <a href="#" class="nav-cta" style="font-size:18px;">GitHub ↗</a>
+  </div>
+
+  <!-- ═══ HERO ══════════════════════════════════════ -->
+  <section class="hero">
+    <img class="hero-bg" id="heroBg" src="aerotechproject-banner.png" alt="" decoding="async" fetchpriority="high">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Electronics · Robotics · Drones</div>
+
+      <h1><span class="line">Aero</span><span class="line accent">Tech</span><span class="line">Project</span></h1>
+
+      <p class="hero-sub">
+        Build real things. Tutorials, source code, and engineering guides for
+        electronics, robotics, and drone projects — made to help you create.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Explore Projects
+        </a>
+        <a href="https://www.patreon.com/AeroTechProject" target="_blank" rel="noopener" class="btn btn-ghost"> Support on Patreon</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Open Source</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURED ══════════════════════════════════ -->
+  <section class="section" id="projects">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label">// Featured</div>
+        <h2 class="section-title">Latest Builds</h2>
+      </div>
+    </div>
+
+
+    <div class="featured-grid reveal" id="projectsGrid">
+      <div class="featured-item" data-project-index="22">
+        <a href="aerotechproject-info-22.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-1km-range.png" alt="ESP32 Wireless Yaw & Pitch Control System" loading="lazy">
+            <div class="img-tag">Robotics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ESP32 Wireless Yaw & Pitch Control System</div>
+            <p class="card-desc">A long-range wireless setup that lets you steer yaw and pitch remotely using ESP32 and NRF24L01 modules.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · NRF24</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="21">
+        <a href="aerotechproject-info-21.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-tr.jpg" alt="Wireless Control System (ESP32 + NRF24L01)" loading="lazy">
+            <div class="img-tag">NRF24</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Wireless Control System (ESP32 + NRF24L01)</div>
+            <p class="card-desc">A compact wireless link pairing two ESP32 boards with NRF24L01 radios for reliable remote control.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · NRF24</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="20">
+        <a href="aerotechproject-info-20.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-20.jpg" alt="ESP32 2-Axis Stabilization System" loading="lazy">
+            <div class="img-tag">Stabilization</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ESP32 2-Axis Stabilization System</div>
+            <p class="card-desc">Keep any platform steady with a real-time 2-axis stabilization system driven by an ESP32 and MPU6050 sensor.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · MPU6050</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="19">
+        <a href="aerotechproject-info-19.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-19.jpg" alt="Smart RFID Lock" loading="lazy">
+            <div class="img-tag">Security</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Smart RFID Lock</div>
+            <p class="card-desc">A simple, secure access-control lock that opens only for authorized RFID cards using an Arduino board.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino · RFID</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="18">
+        <a href="aerotechproject-info-18.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-18.jpg" alt="ESP32 Stabilizer Project" loading="lazy">
+            <div class="img-tag">Stabilization</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ESP32 Stabilizer Project</div>
+            <p class="card-desc">Gyroscope feedback and PID control combine to stabilize a camera or gimbal mount with an ESP32.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · MPU6050</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="17">
+        <a href="aerotechproject-info-17.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-17.jpg" alt="ESP32 Air Mouse" loading="lazy">
+            <div class="img-tag">HID</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ESP32 Air Mouse</div>
+            <p class="card-desc">Turn hand motion into cursor movement with a Bluetooth air mouse built around an ESP32 and motion sensor.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · BLE</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="16">
+        <a href="aerotechproject-info-16.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-16.jpg" alt="ESP32 Bluetooth Car" loading="lazy">
+            <div class="img-tag">Robotics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">ESP32 Bluetooth Car</div>
+            <p class="card-desc">A remote-controlled car driven over Bluetooth, built as a hands-on introduction to ESP32 robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · Bluetooth</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="15">
+        <a href="aerotechproject-info-15.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-15.jpg" alt="Hand Tracking Servo Control" loading="lazy">
+            <div class="img-tag">Computer Vision</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Hand Tracking Servo Control</div>
+            <p class="card-desc">Control servo motors in real time by tracking hand movements, blending computer vision with electronics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Python · CV</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="14">
+        <a href="aerotechproject-info-14.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-14.jpg" alt="DIY Bluetooth Mouse (ESP32 + MPU6050)" loading="lazy">
+            <div class="img-tag">HID</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">DIY Bluetooth Mouse (ESP32 + MPU6050)</div>
+            <p class="card-desc">Build your own motion-controlled Bluetooth mouse using an ESP32 paired with an MPU6050 gyroscope.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">ESP32 · MPU6050</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="13">
+        <a href="aerotechproject-info-13.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-13.png" alt="MPU6050 Gyro Horizon Indicator" loading="lazy">
+            <div class="img-tag">Display</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">MPU6050 Gyro Horizon Indicator</div>
+            <p class="card-desc">Recreate an aircraft-style artificial horizon display using live MPU6050 gyroscope readings.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">OLED · Gyro</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="12">
+        <a href="aerotechproject-info-12.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-12.jpg" alt="MPU6050 Air Gyroscope" loading="lazy">
+            <div class="img-tag">Sensors</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">MPU6050 Air Gyroscope</div>
+            <p class="card-desc">Explore orientation sensing and motion tracking with a standalone MPU6050 gyroscope build.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">IMU · Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="11">
+        <a href="aerotechproject-info-11.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-11.jpg" alt="MPU6050 Project" loading="lazy">
+            <div class="img-tag">Sensors</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">MPU6050 Project</div>
+            <p class="card-desc">A foundational project exploring the capabilities of the MPU6050 accelerometer and gyroscope module.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">I2C · IMU</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="10">
+        <a href="aerotechproject-info-10.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-10.jpg" alt="3D OLED" loading="lazy">
+            <div class="img-tag">Display</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">3D OLED</div>
+            <p class="card-desc">Create eye-catching 3D-style visual effects on a small, low-cost OLED display.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">OLED · SPI</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="09">
+        <a href="aerotechproject-info-09.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-09.jpg" alt="Arduino Radar Project" loading="lazy">
+            <div class="img-tag">Radar</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Arduino Radar Project</div>
+            <p class="card-desc">A rotating ultrasonic radar system that detects and displays nearby objects using Arduino.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Ultrasonic · Servo</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="08">
+        <a href="aerotechproject-info-08.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-08.jpg" alt="Chrome Dino Game" loading="lazy">
+            <div class="img-tag">Fun Build</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Chrome Dino Game</div>
+            <p class="card-desc">Recreate the classic Chrome dinosaur game as a fun, hands-on microcontroller programming exercise.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="07">
+        <a href="aerotechproject-info-07.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-07.jpg" alt="Arduino Project" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Arduino Project</div>
+            <p class="card-desc">A hands-on Arduino build exploring core electronics and microcontroller programming concepts.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="06">
+        <a href="aerotechproject-info-06.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-06.jpg" alt="Project Code 6" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 6</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="05">
+        <a href="aerotechproject-info-05.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-05.jpg" alt="Project Code 5" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 5</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="04">
+        <a href="aerotechproject-info-04.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-04.jpg" alt="Project Code 4" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 4</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="03">
+        <a href="aerotechproject-info-03.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-03.jpg" alt="Project Code 3" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 3</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="02">
+        <a href="aerotechproject-info-02.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-02.jpg" alt="Project Code 2" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 2</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="featured-item" data-project-index="01">
+        <a href="aerotechproject-info-01.html">
+          <div class="img-wrap">
+            <img src="aerotechproject-photo-01.jpg" alt="Project Code 1" loading="lazy">
+            <div class="img-tag">Electronics</div>
+            <div class="img-overlay"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Project Code 1</div>
+            <p class="card-desc">An experimental build exploring new ideas in embedded electronics and robotics.</p>
+            <div class="card-meta">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Arduino</span>
+              <div class="card-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="pagination" id="projectsPagination"></div>
+      
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">Aero<span>Tech</span>Project</div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/AeroTechProject" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="https://www.google.com/s2/favicons?sz=64&domain=instagram.com" alt="Instagram">
+      </a>
+      <a href="https://www.youtube.com/@AeroTechProject" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="https://www.google.com/s2/favicons?sz=64&domain=youtube.com" alt="YouTube">
+      </a>
+      <a href="https://www.tiktok.com/@AeroTechProject" target="_blank" rel="noopener" aria-label="TikTok">
+        <img src="https://www.google.com/s2/favicons?sz=64&domain=tiktok.com" alt="TikTok">
+      </a>
+      <a href="https://www.patreon.com/AeroTechProject" target="_blank" rel="noopener" aria-label="Patreon">
+        <img src="https://www.google.com/s2/favicons?sz=64&domain=patreon.com" alt="Patreon">
+      </a>
+    </div>
+    <div class="footer-copy">
+  <span class="copy-symbol">&copy;</span><span>2026 AEROTECHPROJECT</span>
+</div>
+
+  </footer>
+
+  <script>
+    // ─── Projects pagination ───────────────────────────
+    (function () {
+      const PER_PAGE = 8;
+      const grid = document.getElementById('projectsGrid');
+      const pagWrap = document.getElementById('projectsPagination');
+      if (!grid || !pagWrap) return;
+
+      const items = Array.from(grid.querySelectorAll('.featured-item'));
+      const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
+      let currentPage = 1;
+
+      function renderPage(page, opts) {
+        opts = opts || {};
+        currentPage = Math.min(Math.max(1, page), totalPages);
+        items.forEach((item, i) => {
+          const itemPage = Math.floor(i / PER_PAGE) + 1;
+          item.style.display = (itemPage === currentPage) ? '' : 'none';
+        });
+        renderPagination();
+        if (opts.scroll) {
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function renderPagination() {
+        pagWrap.innerHTML = '';
+        if (totalPages <= 1) return;
+
+        for (let p = 1; p <= totalPages; p++) {
+          const btn = document.createElement('button');
+          btn.textContent = p;
+          if (p === currentPage) btn.classList.add('active');
+          btn.addEventListener('click', () => renderPage(p, { scroll: true }));
+          pagWrap.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'Next →';
+        nextBtn.classList.add('next');
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', () => renderPage(currentPage + 1, { scroll: true }));
+        pagWrap.appendChild(nextBtn);
+      }
+
+      renderPage(1);
+    })();
+
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => { mobileNav.classList.toggle('open'); });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
